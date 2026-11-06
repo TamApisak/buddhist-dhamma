@@ -47,6 +47,8 @@ js/main.js            ส่วนหัว/ส่วนท้าย เมน�
 js/*.js               สคริปต์ของแต่ละหน้า
 assets/               โลโก้ชั่วคราว ภาพประกอบ SVG และโฟลเดอร์รูปภาพ
 tools/serve.js        เซิร์ฟเวอร์ทดสอบขนาดเล็ก
+tools/make-og-image.js สร้างภาพสำหรับแชร์ลิงก์ assets/og-image.png จากแม่แบบใน tools/og-image/ (ดูข้อ 5.1)
+sitemap.xml           รายการหน้าเว็บสำหรับส่งให้ Google Search Console
 404.html              หน้าที่แสดงเมื่อไม่พบหน้า (ใช้บน GitHub Pages และเซิร์ฟเวอร์ทดสอบ)
 .github/workflows/    ขั้นตอนเผยแพร่อัตโนมัติขึ้น GitHub Pages (ดูข้อ 6)
 .nojekyll, .gitignore ไฟล์ตั้งค่าสำหรับ Git และ GitHub Pages (ดูข้อ 6)
@@ -126,8 +128,21 @@ node --check content/articles.js
 | ภาพบทความ / กิจกรรม | 1200×750 px (สัดส่วน 16:10) | ช่อง `image` ของแต่ละรายการ |
 | ภาพครูบาอาจารย์ | 800×1000 px (สัดส่วน 4:5) | ช่อง `image` ใน `content/teachers.js` |
 | ภาพในหน้าเกี่ยวกับชมรม | 1200×900 px (สัดส่วน 4:3) | แทนที่กรอบ "ภาพกิจกรรมของชมรม (รอรูปภาพ)" ใน `about.html` ด้วย `<img>` |
+| ภาพสำหรับแชร์ลิงก์ (Facebook / LINE) | 1200×630 px สร้างอัตโนมัติ | `assets/og-image.png` ดูข้อ 5.1 |
 
 ตำแหน่งที่ยังไม่มีรูปจะแสดงกรอบภาพชั่วคราวพร้อมข้อความ "รอรูปภาพ" โดยอัตโนมัติ
+
+### 5.1 ภาพที่แสดงเมื่อแชร์ลิงก์
+
+เมื่อโพสต์ลิงก์เว็บไซต์บน Facebook หรือ LINE จะแสดงภาพ `assets/og-image.png` (1200×630 px) ซึ่งมีโลโก้ ชื่อชมรม และคำขวัญ ทุกหน้าใช้ภาพเดียวกัน โดยระบุไว้ในแท็ก `og:image` ส่วนหัวของไฟล์ `.html` แต่ละไฟล์
+
+ภาพนี้สร้างจากแม่แบบ `tools/og-image/template.html` ซึ่งดึงชื่อชมรม คำขวัญ และโลโก้มาจาก `content/site.js` เมื่อเปลี่ยนโลโก้ ชื่อ หรือคำขวัญ ให้สร้างภาพใหม่ด้วยคำสั่งนี้ (ต้องมี Google Chrome ในเครื่องและต่ออินเทอร์เน็ตเพื่อโหลดฟอนต์)
+
+```bash
+node tools/make-og-image.js
+```
+
+จากนั้น commit และ push ตามข้อ 6.2 Facebook จะจำภาพเดิมไว้ระยะหนึ่ง ให้เปิด <https://developers.facebook.com/tools/debug/> วางลิงก์เว็บไซต์ แล้วกด **Scrape Again** เพื่อให้ดึงภาพใหม่ทันที
 
 ---
 
@@ -137,7 +152,7 @@ node --check content/articles.js
 
 ไฟล์ที่เกี่ยวข้องกับการเผยแพร่
 
-- `.github/workflows/deploy-pages.yml` — ขั้นตอนเผยแพร่อัตโนมัติของ GitHub Actions (ตรวจว่าเปิดใช้ Pages แล้ว ตรวจไวยากรณ์ไฟล์ JavaScript แล้วจึงนำขึ้น Pages เฉพาะไฟล์ `.html` ที่โฟลเดอร์หลัก, `.nojekyll` และโฟลเดอร์ `assets/`, `content/`, `css/`, `js/` ส่วน `tools/`, `design/`, `presentation/`, `.claude/` และ `README.md` จะไม่ถูกเผยแพร่ หากเพิ่มโฟลเดอร์ใหม่ที่ต้องเผยแพร่ ให้เพิ่มชื่อในขั้นตอน *Collect site files* ของไฟล์นี้)
+- `.github/workflows/deploy-pages.yml` — ขั้นตอนเผยแพร่อัตโนมัติของ GitHub Actions (ตรวจว่าเปิดใช้ Pages แล้ว ตรวจไวยากรณ์ไฟล์ JavaScript แล้วจึงนำขึ้น Pages เฉพาะไฟล์ `.html` ที่โฟลเดอร์หลัก, `.nojekyll`, `sitemap.xml` และโฟลเดอร์ `assets/`, `content/`, `css/`, `js/` ส่วน `tools/`, `design/`, `presentation/`, `.claude/` และ `README.md` จะไม่ถูกเผยแพร่ หากเพิ่มโฟลเดอร์ใหม่ที่ต้องเผยแพร่ ให้เพิ่มชื่อในขั้นตอน *Collect site files* ของไฟล์นี้)
 - `404.html` — หน้าภาษาไทยที่แสดงเมื่อผู้ชมเปิดลิงก์ที่ไม่มีอยู่
 - `.nojekyll` — บอก GitHub ว่าไม่ต้องประมวลผลไฟล์ด้วย Jekyll (จำเป็นเมื่อเลือกเผยแพร่จาก branch โดยตรงแทน GitHub Actions)
 - `.gitignore` — รายการไฟล์ที่ไม่เก็บใน Git เช่น `.DS_Store`, โฟลเดอร์แบบร่าง `design/` และโฟลเดอร์วิดีโอนำเสนอ `presentation/`
@@ -186,6 +201,8 @@ git push
 ### 6.3 ชื่อโดเมนของชมรมเอง (ถ้ามี)
 
 ที่ **Settings → Pages → Custom domain** ใส่ชื่อโดเมนแล้วกด **Save** จากนั้นตั้งค่า DNS ตามคำแนะนำของ GitHub (<https://docs.github.com/pages/configuring-a-custom-domain-for-your-github-pages-site>) เมื่อเผยแพร่ผ่าน GitHub Actions ไม่ต้องมีไฟล์ `CNAME` ใน repository (GitHub จะไม่สร้างให้ และถ้ามีก็จะไม่ถูกใช้) ส่วนใบรับรอง HTTPS GitHub จะออกให้เอง ซึ่งอาจใช้เวลาถึง 24 ชั่วโมง เมื่อตัวเลือกพร้อมแล้วควรติ๊ก **Enforce HTTPS**
+
+หลังเปลี่ยนชื่อโดเมน ให้ค้นหาข้อความ `https://tamapisak.github.io/buddhist-dhamma/` ในไฟล์ `.html` ทุกไฟล์ (แท็ก `og:image`) และใน `sitemap.xml` แล้วแทนที่ด้วยที่อยู่ใหม่ เช่น `https://ชื่อโดเมน/` เพราะ Facebook ต้องใช้ที่อยู่ภาพแบบเต็ม
 
 ### 6.4 บริการอื่น
 

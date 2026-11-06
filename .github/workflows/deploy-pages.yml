@@ -61,12 +61,12 @@ jobs:
           exit $status
 
       - name: Collect site files
-        # เผยแพร่เฉพาะส่วนที่เป็นเว็บไซต์: ไฟล์ .html ที่โฟลเดอร์หลัก, .nojekyll และโฟลเดอร์ assets, content, css, js
+        # เผยแพร่เฉพาะส่วนที่เป็นเว็บไซต์: ไฟล์ .html ที่โฟลเดอร์หลัก, .nojekyll, sitemap.xml และโฟลเดอร์ assets, content, css, js
         # โฟลเดอร์อื่น (เช่น tools, design, presentation) และ README.md จะไม่ถูกนำขึ้นเว็บ
         # หากเพิ่มโฟลเดอร์ใหม่ที่ต้องเผยแพร่ ให้เพิ่มชื่อในบรรทัด cp -R ด้านล่าง
         run: |
           mkdir -p _site
-          cp *.html .nojekyll _site/
+          cp *.html .nojekyll sitemap.xml _site/
           cp -R assets content css js _site/
           find _site \( -name '.DS_Store' -o -name 'README.md' \) -delete
           echo "ไฟล์ที่จะเผยแพร่:" && find _site -type f | sort

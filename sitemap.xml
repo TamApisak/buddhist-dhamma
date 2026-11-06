@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- รายการหน้าเว็บสำหรับเครื่องมือค้นหา ใช้ส่งใน Google Search Console
+     หากย้ายไปใช้ชื่อโดเมนของชมรมเอง ให้แก้ที่อยู่ทุกบรรทัดในไฟล์นี้ด้วย -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://tamapisak.github.io/buddhist-dhamma/</loc></url>
+  <url><loc>https://tamapisak.github.io/buddhist-dhamma/about.html</loc></url>
+  <url><loc>https://tamapisak.github.io/buddhist-dhamma/dhamma.html</loc></url>
+  <url><loc>https://tamapisak.github.io/buddhist-dhamma/teachers.html</loc></url>
+  <url><loc>https://tamapisak.github.io/buddhist-dhamma/media.html</loc></url>
+  <url><loc>https://tamapisak.github.io/buddhist-dhamma/activities.html</loc></url>
+  <url><loc>https://tamapisak.github.io/buddhist-dhamma/contact.html</loc></url>
+</urlset>
