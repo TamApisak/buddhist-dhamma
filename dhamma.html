@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="th" data-text-size="m">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>คลังธรรมะ | ชมรมญาติธรรม พุทธธรรมกรรมฐาน</title>
+  <meta name="description" content="ค้นหาและอ่านบทความธรรมะ จัดหมวดตามศีล สมาธิ ปัญญา การเจริญสติ และธรรมะในชีวิตประจำวัน พร้อมแหล่งอ้างอิง">
+  <meta name="theme-color" content="#1F3D2B">
+  <meta property="og:title" content="คลังธรรมะ | ชมรมญาติธรรม พุทธธรรมกรรมฐาน">
+  <meta property="og:description" content="ค้นหาและอ่านบทความธรรมะ จัดหมวดตามศีล สมาธิ ปัญญา การเจริญสติ และธรรมะในชีวิตประจำวัน พร้อมแหล่งอ้างอิง">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="th_TH">
+  <meta property="og:site_name" content="ชมรมญาติธรรม พุทธธรรมกรรมฐาน">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script>(function(){try{var s=localStorage.getItem('pdk-text-size');if(s&&/^(s|m|l|xl)$/.test(s))document.documentElement.setAttribute('data-text-size',s);}catch(e){}})();</script>
+  <script src="content/site.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="content/articles.js" defer></script>
+  <script src="js/library.js" defer></script>
+</head>
+<body data-page="dhamma">
+  <a class="skip-link" href="#main">ข้ามไปยังเนื้อหาหลัก</a>
+  <noscript><div class="noscript-nav">เว็บไซต์นี้ต้องเปิดใช้งาน JavaScript เพื่อแสดงเมนูและเนื้อหาบางส่วน — <a href="index.html">หน้าแรก</a> <a href="about.html">เกี่ยวกับชมรม</a> <a href="dhamma.html">คลังธรรมะ</a> <a href="teachers.html">ครูบาอาจารย์</a> <a href="media.html">สื่อธรรมะ</a> <a href="activities.html">กิจกรรมและจิตอาสา</a> <a href="contact.html">ติดต่อเรา</a></div></noscript>
+  <header class="site-header" id="site-header"></header>
+  <main id="main">
+
+    <section class="page-head">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="เส้นทางหน้า"><ol><li><a href="index.html">หน้าแรก</a></li><li aria-current="page">คลังธรรมะ</li></ol></nav>
+        <p class="eyebrow">อ่านธรรมะ</p>
+        <h1>คลังธรรมะ</h1>
+        <p class="lead">ค้นหาและอ่านบทความธรรมะ จัดหมวดตามศีล สมาธิ ปัญญา การเจริญสติ และธรรมะในชีวิตประจำวัน ทุกบทความระบุผู้เขียนหรือครูบาอาจารย์และแหล่งที่มา</p>
+      </div>
+    </section>
+    <section class="section section-tight">
+      <div class="container">
+        <div id="library-notice"></div>
+        <div class="toolbar">
+          <div class="search">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <label for="search-input" class="visually-hidden">ค้นหาบทความ</label>
+            <input type="search" id="search-input" placeholder="ค้นหาบทความ เช่น พุทโธ สติ ศีล 5" autocomplete="off">
+            <button type="button" class="clear" id="search-clear" aria-label="ล้างคำค้น"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+          </div>
+          <div class="chips" id="topic-chips" role="group" aria-label="กรองตามหัวข้อ"></div>
+        </div>
+        <div class="results-bar">
+          <p id="results-count" role="status" aria-live="polite" class="mb-0"></p>
+          <label>เรียงตาม
+            <select id="sort-select" class="select">
+              <option value="newest">ล่าสุด</option>
+              <option value="oldest">เก่าสุด</option>
+              <option value="title">ชื่อเรื่อง</option>
+            </select>
+          </label>
+        </div>
+        <div class="grid grid-3" id="article-grid"></div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer" id="site-footer"></footer>
+</body>
+</html>

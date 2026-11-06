@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="th" data-text-size="m">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ไม่พบหน้าที่ต้องการ | ชมรมญาติธรรม พุทธธรรมกรรมฐาน</title>
+  <meta name="description" content="ไม่พบหน้าที่ต้องการ หน้านี้อาจถูกย้ายหรือพิมพ์ที่อยู่ไม่ถูกต้อง กลับไปยังหน้าแรกหรือค้นหาในคลังธรรมะของชมรมญาติธรรม พุทธธรรมกรรมฐาน">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#1F3D2B">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!--
+    หน้านี้ถูกเรียกใช้เมื่อผู้ชมเปิดที่อยู่ที่ไม่มีอยู่ (GitHub Pages และเซิร์ฟเวอร์ทดสอบจะใช้ไฟล์ 404.html โดยอัตโนมัติ)
+    เนื่องจากที่อยู่ที่ผิดอาจอยู่ลึกหลายชั้น (เช่น /ชื่อ-repo/a/b/c) หน้านี้จึงไม่โหลดสไตล์ด้วยลิงก์สัมพัทธ์ตรง ๆ
+    แต่จะค้นหาโฟลเดอร์หลักของเว็บไซต์ก่อน (โดยลองหาไฟล์ content/site.js ไล่ขึ้นไปทีละชั้น)
+    แล้วจึงโหลดสไตล์ ส่วนหัว และส่วนท้ายของเว็บไซต์ ระหว่างนั้นจะใช้สไตล์สำรองด้านล่างนี้แทน
+  -->
+  <style>
+    html:not(.site-css) body { margin: 0; font-family: Sarabun, -apple-system, BlinkMacSystemFont, "Noto Sans Thai", Tahoma, sans-serif; background: #F7F3EA; color: #2B2A26; line-height: 1.7; font-size: 18px; }
+    html:not(.site-css) .nf { padding: 4rem 1.25rem; text-align: center; }
+    html:not(.site-css) .nf-inner { max-width: 640px; margin: 0 auto; }
+    html:not(.site-css) .nf-mark { width: 72px; height: 72px; display: block; margin: 0 auto 1.25rem; }
+    html:not(.site-css) .eyebrow { color: #8A6D3B; letter-spacing: .04em; font-weight: 600; margin: 0; }
+    html:not(.site-css) h1 { font-family: "Noto Serif Thai", Sarabun, Georgia, serif; color: #1F3D2B; font-size: 2.2rem; line-height: 1.3; margin: .25rem 0 .75rem; }
+    html:not(.site-css) .lead { margin: 0 auto; }
+    html:not(.site-css) .nf-actions { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; margin: 1.5rem 0; }
+    html:not(.site-css) .nf-actions a { display: inline-block; padding: .8rem 1.4rem; border-radius: 999px; text-decoration: none; font-weight: 600; border: 1px solid #1F3D2B; color: #1F3D2B; }
+    html:not(.site-css) .nf-actions a.btn-primary { background: #1F3D2B; color: #F7F3EA; }
+    html:not(.site-css) .nf-note { color: #6B665C; font-size: .95rem; margin: 0; }
+    html:not(.site-css) .nf-note a { color: #2A4F38; }
+    html:not(.site-css) .skip-link { position: absolute; top: -100px; left: 1rem; padding: .5rem .9rem; background: #1F3D2B; color: #F7F3EA; border-radius: 8px; }
+    html:not(.site-css) .skip-link:focus { top: 1rem; }
+    html:not(.site-css) .noscript-nav { padding: 1rem 1.25rem; background: #F0E6CC; border-bottom: 1px solid #D9C28F; }
+    html:not(.site-css) .noscript-nav a { margin-right: 1rem; color: #1F3D2B; }
+  </style>
+  <script>(function(){try{var s=localStorage.getItem('pdk-text-size');if(s&&/^(s|m|l|xl)$/.test(s))document.documentElement.setAttribute('data-text-size',s);}catch(e){}})();</script>
+  <script>
+    (function () {
+      // รายการโฟลเดอร์ที่อาจเป็นโฟลเดอร์หลักของเว็บไซต์ เรียงจากชั้นที่ลึกที่สุดขึ้นไปจนถึง "/"
+      var dirs = location.pathname.split('/').slice(1, -1).filter(Boolean);
+      var candidates = [];
+      for (var i = dirs.length; i >= 0; i--) candidates.push('/' + dirs.slice(0, i).join('/') + (i ? '/' : ''));
+
+      // ที่อยู่ที่ไม่ต้องแก้: มี scheme (https:, mailto:), ขึ้นต้นด้วย //, เริ่มจากราก (/), หรือเป็น #
+      var SKIP = /^(?:[a-z][a-z0-9+.-]*:|\/\/|\/|#)/i;
+      function absolutize(base) {
+        var els = document.querySelectorAll('a[href], img[src]');
+        for (var j = 0; j < els.length; j++) {
+          var el = els[j], attr = el.hasAttribute('href') ? 'href' : 'src', v = el.getAttribute(attr);
+          if (v && !SKIP.test(v)) el.setAttribute(attr, base + v);
+        }
+      }
+      function loadScript(src, cb) {
+        var s = document.createElement('script'); s.src = src; s.onload = cb; s.onerror = cb;
+        document.head.appendChild(s);
+      }
+      function apply(base) {
+        var fix = function () { absolutize(base); };
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fix); else fix();
+        var icon = document.createElement('link');
+        icon.rel = 'icon'; icon.type = 'image/svg+xml'; icon.href = base + 'assets/favicon.svg';
+        document.head.appendChild(icon);
+        var link = document.createElement('link');
+        link.rel = 'stylesheet'; link.href = base + 'css/style.css';
+        link.onload = function () {
+          document.documentElement.classList.add('site-css');
+          loadScript(base + 'content/site.js', function () {
+            // ปรับที่อยู่ในข้อมูลเว็บไซต์ให้ชี้จากโฟลเดอร์หลักก่อนสร้างส่วนหัว/ส่วนท้าย (กันไม่ให้โหลดโลโก้ผิดที่)
+            var site = window.SITE;
+            if (site) {
+              if (site.logo && !SKIP.test(site.logo)) site.logo = base + site.logo;
+              if (site.nav) for (var k = 0; k < site.nav.length; k++) {
+                var h = site.nav[k].href;
+                if (h && !SKIP.test(h)) site.nav[k].href = base + h;
+              }
+            }
+            loadScript(base + 'js/main.js', function () { absolutize(base); });
+          });
+        };
+        document.head.appendChild(link);
+      }
+      function probe(i) {
+        if (i >= candidates.length) return;
+        fetch(candidates[i] + 'content/site.js', { method: 'HEAD', cache: 'no-store' })
+          .then(function (r) { if (r.ok) apply(candidates[i]); else probe(i + 1); }, function () { probe(i + 1); });
+      }
+      if (window.fetch && location.protocol !== 'file:') probe(0);
+    })();
+  </script>
+</head>
+<body data-page="notfound">
+  <a class="skip-link" href="#main">ข้ามไปยังเนื้อหาหลัก</a>
+  <noscript><div class="noscript-nav">เว็บไซต์นี้ต้องเปิดใช้งาน JavaScript เพื่อแสดงเมนูและเนื้อหาบางส่วน — <a href="index.html">หน้าแรก</a> <a href="about.html">เกี่ยวกับชมรม</a> <a href="dhamma.html">คลังธรรมะ</a> <a href="teachers.html">ครูบาอาจารย์</a> <a href="media.html">สื่อธรรมะ</a> <a href="activities.html">กิจกรรมและจิตอาสา</a> <a href="contact.html">ติดต่อเรา</a></div></noscript>
+  <header class="site-header" id="site-header"></header>
+  <main id="main">
+    <section class="section nf" aria-labelledby="nf-title">
+      <div class="container nf-inner">
+        <svg class="nf-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <circle cx="32" cy="32" r="31" fill="#1F3D2B"/>
+          <circle cx="32" cy="32" r="26.5" fill="none" stroke="#B8975A" stroke-width="1.4" opacity=".85"/>
+          <path d="M32 11 C 19.5 15, 13 26, 17.5 36.5 C 20.5 43.5, 28 46.5, 31.2 56.5 L32 59 L32.8 56.5 C 36 46.5, 43.5 43.5, 46.5 36.5 C 51 26, 44.5 15, 32 11 Z" fill="#EADFC4"/>
+          <path d="M32 15.5 L32 55" stroke="#1F3D2B" stroke-width="1.2" opacity=".55" stroke-linecap="round"/>
+          <path d="M32 24 C 27.5 26.5, 24 30.5, 22.5 36 M32 24 C 36.5 26.5, 40 30.5, 41.5 36 M32 33.5 C 29 35.5, 27 38.5, 26.5 43 M32 33.5 C 35 35.5, 37 38.5, 37.5 43" stroke="#1F3D2B" stroke-width="1" fill="none" opacity=".5" stroke-linecap="round"/>
+        </svg>
+        <p class="eyebrow">ข้อผิดพลาด 404</p>
+        <h1 id="nf-title">ไม่พบหน้าที่ต้องการ</h1>
+        <p class="lead">หน้านี้อาจถูกย้าย เปลี่ยนชื่อ หรือพิมพ์ที่อยู่ไม่ถูกต้อง ขออภัยในความไม่สะดวก</p>
+        <div class="nf-actions">
+          <a class="btn btn-primary" href="index.html">กลับหน้าแรก</a>
+          <a class="btn btn-secondary" href="dhamma.html">ค้นหาในคลังธรรมะ</a>
+        </div>
+        <p class="nf-note">หากมาจากลิงก์ที่เคยแชร์ไว้ ลองค้นหาชื่อบทความในคลังธรรมะ หรือ<a href="contact.html">ติดต่อชมรม</a>ผ่านเพจ Facebook</p>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer" id="site-footer"></footer>
+</body>
+</html>

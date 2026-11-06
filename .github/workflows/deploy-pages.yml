@@ -1,0 +1,84 @@
+# นำเว็บไซต์ขึ้น GitHub Pages โดยอัตโนมัติทุกครั้งที่มีการ push ไปยัง branch "main"
+#
+# ต้องตั้งค่าครั้งเดียวใน GitHub: Settings → Pages → Build and deployment → Source: "GitHub Actions"
+# (ดูขั้นตอนทั้งหมดใน README.md ข้อ 6) หากยังไม่ได้ตั้งค่า การทำงานครั้งแรกจะหยุดพร้อมข้อความ
+# แจ้งให้ไปตั้งค่า แล้วกลับมากด Re-run jobs
+#
+# ก่อนเผยแพร่ workflow จะตรวจไวยากรณ์ไฟล์ JavaScript ในโฟลเดอร์ content/, js/ และ tools/
+# หากพิมพ์ผิด (เช่น ลืมเครื่องหมายจุลภาค) การเผยแพร่จะหยุดและแจ้งบรรทัดที่ผิด
+# แทนที่จะปล่อยให้หน้าเว็บจริงแสดงผลว่างเปล่า
+#
+# เผยแพร่เฉพาะไฟล์ .html ที่โฟลเดอร์หลัก, .nojekyll และโฟลเดอร์ assets, content, css, js เท่านั้น
+# (โฟลเดอร์อื่น เช่น tools/, design/, presentation/ และ README.md จะไม่ถูกนำขึ้นเว็บ)
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Check and deploy
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check that GitHub Pages is enabled
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api "repos/${GITHUB_REPOSITORY}/pages" --silent; then
+            echo "GitHub Pages เปิดใช้งานแล้ว"
+          else
+            msg="ยังไม่ได้เปิดใช้ GitHub Pages สำหรับ repository นี้: ไปที่ Settings → Pages → Build and deployment → เลือก Source: GitHub Actions แล้วกลับมากด Re-run jobs"
+            echo "::error title=GitHub Pages is not enabled::${msg}"
+            printf '## %s\n' "${msg}" >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Check JavaScript syntax (content/, js/, tools/)
+        run: |
+          shopt -s nullglob
+          status=0
+          for f in content/*.js js/*.js tools/*.js; do
+            if node --check "$f"; then echo "OK   $f"; else echo "FAIL $f"; status=1; fi
+          done
+          exit $status
+
+      - name: Collect site files
+        # เผยแพร่เฉพาะส่วนที่เป็นเว็บไซต์: ไฟล์ .html ที่โฟลเดอร์หลัก, .nojekyll และโฟลเดอร์ assets, content, css, js
+        # โฟลเดอร์อื่น (เช่น tools, design, presentation) และ README.md จะไม่ถูกนำขึ้นเว็บ
+        # หากเพิ่มโฟลเดอร์ใหม่ที่ต้องเผยแพร่ ให้เพิ่มชื่อในบรรทัด cp -R ด้านล่าง
+        run: |
+          mkdir -p _site
+          cp *.html .nojekyll _site/
+          cp -R assets content css js _site/
+          find _site \( -name '.DS_Store' -o -name 'README.md' \) -delete
+          echo "ไฟล์ที่จะเผยแพร่:" && find _site -type f | sort
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v5

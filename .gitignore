@@ -1,0 +1,24 @@
+# ไฟล์ระบบของ macOS / Windows
+.DS_Store
+Thumbs.db
+
+# การตั้งค่าเฉพาะเครื่อง
+.claude/settings.local.json
+
+# ไฟล์ชั่วคราว
+*.log
+node_modules/
+_site/
+.env
+
+# ไฟล์ชั่วคราวของสคริปต์สร้างคลิปสาธิต
+tools/presentation/node_modules/
+tools/presentation/audio/
+tools/presentation/video/
+tools/presentation/markers.json
+
+# แบบร่างงานออกแบบสำหรับดูภายใน (ไม่เก็บใน Git และไม่เผยแพร่)
+design/
+
+# วิดีโอและไฟล์นำเสนอที่โฟลเดอร์หลัก (ขนาดใหญ่ ไม่ใช่ส่วนหนึ่งของเว็บไซต์)
+/presentation/

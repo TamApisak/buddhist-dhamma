@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dhamma-site",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["tools/serve.js", "8765"],
+      "port": 8765
+    },
+    {
+      "name": "dhamma-site-pages-test",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["tools/serve.js", "8766", "--prefix", "buddhist-dhamma"],
+      "port": 8766
+    }
+  ]
+}
