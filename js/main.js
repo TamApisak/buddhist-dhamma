@@ -329,10 +329,34 @@
     nav.addEventListener('click', function (e) {
       if (e.target.closest('a')) setOpen(false);
     });
-    var mq = window.matchMedia('(min-width: 1200px)');
+    var mq = window.matchMedia('(min-width: 1260px)');
     var onChange = function () { if (mq.matches) setOpen(false); };
     if (mq.addEventListener) mq.addEventListener('change', onChange); else if (mq.addListener) mq.addListener(onChange);
+
+    // From 1260px (css/style.css) the menu is one row. When that row does not fit, e.g. at the
+    // larger text sizes, html.nav-collapse keeps the menu button instead of overflowing the page.
+    function fitNav() {
+      var root = document.documentElement;
+      var inner = $('.header-inner');
+      var was = root.classList.contains('nav-collapse');
+      root.classList.remove('nav-collapse');
+      var collapse = !!inner && window.innerWidth >= 1260 && inner.scrollWidth > inner.clientWidth + 1;
+      root.classList.toggle('nav-collapse', collapse);
+      // The row disappeared under the focused control (e.g. the text-size button): move focus to the menu button.
+      if (!was && collapse && nav.contains(document.activeElement)) btn.focus();
+      if (was && !collapse && window.innerWidth >= 1260 && btn.getAttribute('aria-expanded') === 'true') setOpen(false);
+    }
+    var pending = false;
+    window.addEventListener('resize', function () {
+      if (pending) return;
+      pending = true;
+      window.requestAnimationFrame(function () { pending = false; fitNav(); });
+    });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitNav, function () {});
+    refitNav = fitNav;
+    fitNav();
   }
+  var refitNav = function () {};
 
   /* ---------- ขนาดตัวอักษร ---------- */
   function currentTextSize() {
@@ -347,6 +371,7 @@
     $$('[data-ts="down"]').forEach(function (b) { b.disabled = idx <= 0; });
     $$('[data-ts="up"]').forEach(function (b) { b.disabled = idx >= TEXT_SIZES.length - 1; });
     $$('[data-ts="reset"]').forEach(function (b) { b.setAttribute('aria-pressed', String(size === 'm')); });
+    refitNav();
     if (announce) toast('ขนาดตัวอักษร: ' + TEXT_SIZE_LABELS[size]);
   }
 

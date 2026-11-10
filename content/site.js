@@ -30,6 +30,7 @@ window.SITE = {
     { href: "index.html",      label: "หน้าแรก",           page: "home" },
     { href: "about.html",      label: "เกี่ยวกับชมรม",      page: "about" },
     { href: "dhamma.html",     label: "คลังธรรมะ",          page: "dhamma" },
+    { href: "academic.html",   label: "บทความวิชาการ",      page: "academic" },
     { href: "teachers.html",   label: "ครูบาอาจารย์",       page: "teachers" },
     { href: "media.html",      label: "สื่อธรรมะ",          page: "media" },
     { href: "activities.html", label: "กิจกรรมและจิตอาสา",  page: "activities" },
